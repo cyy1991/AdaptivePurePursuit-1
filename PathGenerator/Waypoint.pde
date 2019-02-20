@@ -3,7 +3,11 @@ public class Waypoint {
     private Vector pos;
 
     public Waypoint(double x, double y) {
-        this.pos = new Vector(x, y);
+        this(new Vector(x, y));
+    }
+
+    public Waypoint(Waypoint waypoint) {
+        this(waypoint.getVector());
     }
 
     public Waypoint(Vector pos) {
@@ -16,6 +20,14 @@ public class Waypoint {
 
     public double getY() {
         return this.pos.getY();
+    }
+
+    public void setX(double x) {
+        this.pos.setX(x);
+    }
+
+    public void setY(double y) {
+        this.pos.setY(y);
     }
 
     public Vector getVector() {

@@ -35,6 +35,18 @@ public class Vector {
         return this.y;
     }
 
+    public void setX(double x) {
+        this.x = x;
+        this.magSquared = -1;
+        this.mag = -1;
+    }
+
+    public void setY(double y) {
+        this.y = y;
+        this.magSquared = -1;
+        this.mag = -1;
+    }
+
     public double getMagSquared() {
         if(this.magSquared == -1) {
             this.magSquared = this.x * this.x + this.y * this.y;
