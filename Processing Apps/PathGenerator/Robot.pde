@@ -18,15 +18,15 @@ class Robot {
         rightSpeed = 0.0;
     }
 
-    void setLeft(double speed) {
+    public void setLeft(double speed) {
         leftSpeed = speed;
     }
 
-    void setRight(double speed) {
+    public void setRight(double speed) {
         rightSpeed = speed;
     }
 
-    void update() {
+    public void update() {
         this.velocity = (this.leftSpeed + this.rightSpeed) / 2.0;
         this.angularVelocity = (this.leftSpeed - this.rightSpeed) / DRIVE_WIDTH;
 
@@ -38,7 +38,7 @@ class Robot {
         this.rightSpeed = 0;
     }
 
-    void show() {
+    public void show() {
         rectMode(CENTER);
         fill(120);
         stroke(0);
@@ -47,5 +47,17 @@ class Robot {
             rotate((float) angle);
             rect(0, 0, (float) DRIVE_WIDTH, (float) DRIVE_WIDTH * 2.0);
         popMatrix();
+    }
+
+    public double getX() {
+        return pos.getX();
+    }
+
+    public double getY() {
+        return pos.getY();
+    }
+
+    public Vector getPos() {
+        return pos;
     }
 }

@@ -12,3 +12,6 @@ double MAX_VELOCITY = 100.0; // inches per second (I think)
 double MAX_ACCELERATION = 100.0; // inches per second squared (I think)
 
 double DRIVE_WIDTH = 30.0;
+
+// Following constants
+double LOOKAHEAD = 12; // 12 - 25 inches
