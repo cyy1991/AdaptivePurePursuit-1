@@ -1,6 +1,7 @@
 public class Waypoint {
 
     private Vector pos;
+    private double targetVelocity;
 
     public Waypoint(double x, double y) {
         this(new Vector(x, y));
@@ -12,6 +13,11 @@ public class Waypoint {
 
     public Waypoint(Vector pos) {
         this.pos = new Vector(pos);
+        targetVelocity = -1.0;
+    }
+
+    public double getDistanceTo(Waypoint other) {
+        return this.pos.getDistanceTo(other.getVector());
     }
 
     public double getX() {
@@ -32,5 +38,13 @@ public class Waypoint {
 
     public Vector getVector() {
         return pos;
+    }
+
+    public double getTargetVelocity() {
+        return this.targetVelocity;
+    }
+
+    public void setTargetVelocity(double targetVelocity) {
+        this.targetVelocity = targetVelocity;
     }
 }

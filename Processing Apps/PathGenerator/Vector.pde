@@ -84,6 +84,11 @@ public class Vector {
         return this.getX() * vector.getX() +  this.getY() * vector.getY();
     }
 
+    public double getDistanceTo(Vector other) {
+        return Math.sqrt((this.getX() - other.getX()) * (this.getX() - other.getX()) +
+            (this.getY() - other.getY()) * (this.getY() - other.getY()));
+    }
+
     public void printInfo() {
         System.out.println("X: " + getX() + ", Y: " + getY());
     }
