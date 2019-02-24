@@ -1,5 +1,5 @@
 // Injection
-double SPACING = 50.0;
+double SPACING = 25.0;
 
 // Smoothing
 double WEIGHT_SMOOTH = 0.75; // 0.75 - 0.98

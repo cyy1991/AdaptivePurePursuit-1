@@ -81,6 +81,10 @@ void keyPressed() {
         start = millis();
         calculateCurvatures();
         System.out.println("Curvature time: " + (millis() - start));
+
+        start = millis();
+        calculateTargetVelocities();
+        System.out.println("Target velocity time: " + (millis() - start));
     }
     if(key == 'r') {
         userPoints.clear();
@@ -106,15 +110,19 @@ void keyPressed() {
             waypoint.getVector().printInfo();
         }
 
-        System.out.println("DistancePath: ");
+        System.out.println("Distances: ");
         for(double distance : distancePath) {
             System.out.println(distance);
         }
 
-
         System.out.println("Curvatures: ");
         for(double curvature : curvatures) {
             System.out.println(curvature);
+        }
+
+        System.out.println("Target Velocities: ");
+        for(Waypoint waypoint : smoothedPoints) {
+            System.out.println(waypoint.getTargetVelocity());
         }
     }
 }
