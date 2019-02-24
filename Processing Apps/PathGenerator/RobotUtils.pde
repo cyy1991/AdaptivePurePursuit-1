@@ -2,6 +2,6 @@
 
 // Gets the waypoint closest to the given coordinates
 Waypoint getClosestPoint(double x, double y) {
-
+    return null;
 }
 

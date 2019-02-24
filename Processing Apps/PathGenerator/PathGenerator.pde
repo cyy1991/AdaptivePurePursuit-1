@@ -38,6 +38,11 @@ void setup() {
 void draw() {
     background(255);
 
+    // robot.setLeft(1.0);
+    // robot.setRight(0.5);
+    robot.update();
+    robot.show();
+
     if(!userInjectedHidden) {
         for(Waypoint waypoint : injectedPoints) {
             drawWaypoint(waypoint, color(255, 0, 0));
@@ -53,11 +58,6 @@ void draw() {
         double curvature = curvatures.get(i);
         drawWaypoint(waypoint, color(0, 255 - ((int) (128 * curvature * 50)), 0));
     }
-
-    // robot.setLeft(1.0);
-    // robot.setRight(0.5);
-    robot.update();
-    robot.show();
 }
 
 void mousePressed() {
