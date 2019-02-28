@@ -20,6 +20,10 @@ public class Waypoint {
         return this.pos.getDistanceTo(other.getVector());
     }
 
+    public double getDistanceTo(double x, double y) {
+        return this.pos.getDistanceTo(new Vector(x, y));
+    }
+
     public double getX() {
         return this.pos.getX();
     }
