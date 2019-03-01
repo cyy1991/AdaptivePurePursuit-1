@@ -1,3 +1,6 @@
+// Procesing Drawing
+float SCALE_FACTOR = 2.0;
+
 // Injection
 double SPACING = 25.0;
 

@@ -9,7 +9,7 @@ class Robot {
     double rightSpeed;
 
     public Robot() {
-        pos = new Vector(600, 300);
+        pos = new Vector(width / 2 / SCALE_FACTOR, height / 2 / SCALE_FACTOR);
         velocity = 0.0;
         angle = 0.0;
         angularVelocity = 0.0;
@@ -43,9 +43,9 @@ class Robot {
         fill(120);
         stroke(0);
         pushMatrix();
-            translate((float) this.pos.getX(), (float) this.pos.getY());
+            translate((float) this.pos.getX() * SCALE_FACTOR, (float) this.pos.getY() * SCALE_FACTOR);
             rotate((float) angle);
-            rect(0, 0, (float) DRIVE_WIDTH, (float) DRIVE_WIDTH * 2.0);
+            rect(0, 0, (float) DRIVE_WIDTH * SCALE_FACTOR, (float) DRIVE_WIDTH * 2.0 * SCALE_FACTOR);
         popMatrix();
     }
 

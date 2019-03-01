@@ -61,7 +61,7 @@ void draw() {
 }
 
 void mousePressed() {
-    userPoints.add(new Waypoint(mouseX, mouseY));
+    userPoints.add(new Waypoint(mouseX / SCALE_FACTOR, mouseY / SCALE_FACTOR));
 }
 
 void keyPressed() {
@@ -132,5 +132,5 @@ void drawWaypoint(Waypoint waypoint, color waypointColor) {
     stroke(waypointColor);
     fill(waypointColor);
 
-    ellipse((float) waypoint.getX(), (float) waypoint.getY(), 10.0, 10.0);
+    ellipse((float) waypoint.getX() * SCALE_FACTOR, (float) waypoint.getY() * SCALE_FACTOR, 10.0, 10.0);
 }
