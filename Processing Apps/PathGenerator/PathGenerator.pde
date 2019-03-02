@@ -21,6 +21,7 @@ boolean following;
 
 void setup() {
     size(1200, 600);
+    frameRate(60);
 
     userPoints = new ArrayList<Waypoint>();
     injectedPoints = new ArrayList<Waypoint>();
@@ -39,9 +40,7 @@ void setup() {
 
 void draw() {
     background(255);
-
-    // robot.setLeft(1.0);
-    // robot.setRight(0.5);
+    
     robot.update();
     robot.show();
 

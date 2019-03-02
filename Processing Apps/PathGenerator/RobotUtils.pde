@@ -113,6 +113,9 @@ double getCurvatureToPoint(Vector pos, double angle, Vector lookAhead) {
 double pathLastT = 0.0;
 int pathLastLookAheadIndex = 0;
 int pathLastClosestIndex = 0;
+double left = 0;
+double right = 0;
+long lastCall = -1;
 
 void followPath() {
     Vector robotPos = robot.getPos();
@@ -126,9 +129,22 @@ void followPath() {
     pathLastClosestIndex = getClosestPoint(robotPos.getX(), robotPos.getY(), pathLastClosestIndex);
     double targetVelocity = smoothedPoints.get(pathLastClosestIndex).getTargetVelocity();
 
-    double left = targetVelocity * (2.0 + curvature * DRIVE_WIDTH) / 2.0;
-    double right = targetVelocity * (2.0 - curvature * DRIVE_WIDTH) / 2.0;
-    
+    double tempLeft = targetVelocity * (2.0 + curvature * DRIVE_WIDTH) / 2.0;
+    double tempRight = targetVelocity * (2.0 - curvature * DRIVE_WIDTH) / 2.0;
+
+    if(lastCall == -1) lastCall = millis();
+    double maxChange = (millis() - lastCall) * MAX_ACCELERATION;
+    left += constrainDouble(tempLeft - left, maxChange, -maxChange);
+    right += constrainDouble(tempRight - right, maxChange, -maxChange);
+
     robot.setLeft(left);
     robot.setRight(right);
+
+    lastCall = millis();
+}
+
+double constrainDouble(double value, double max, double min) {
+    if(value < min) return min;
+    if(value > max) return max;
+    return value;
 }
