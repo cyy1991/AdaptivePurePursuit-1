@@ -60,4 +60,9 @@ class Robot {
     public Vector getPos() {
         return pos;
     }
+
+    // returns angle in radians with north as 0
+    public double getAngle() {
+        return angle;
+    }
 }

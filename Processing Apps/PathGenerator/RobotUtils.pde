@@ -1,5 +1,7 @@
 // All functions related to the robot following the path
 
+// TODO Optimize the distance functions w/ distance squared
+
 // Gets the index of the waypoint closest to the given coordinates and 
 // uses the last found point to optimize the search
 int getClosestPoint(double x, double y, int lastPoint) {
@@ -89,4 +91,44 @@ double getLookAheadPointT(Vector pos, Vector start, Vector end) {
     }
 
     return -1;
+}
+
+// angle is in radians
+double getCurvatureToPoint(Vector pos, double angle, Vector lookAhead) {
+    double a = -Math.tan(angle);
+    double b = 1.0;
+    double c = Math.tan(angle) * pos.getX() - pos.getY();
+
+    double x = Math.abs(a * lookAhead.getX() + b * lookAhead.getY() + c) / Math.sqrt(a * a + b * b);
+    double l = pos.getDistanceTo(lookAhead);
+    double curvature = 2 * x / l / l;
+
+    Vector otherPoint = pos.add(new Vector(Math.cos(angle), Math.sin(angle)));
+    double side = Math.signum((otherPoint.getY() - pos.getY()) * (lookAhead.getX() - pos.getX()) - 
+        (otherPoint.getX() - pos.getX()) * (lookAhead.getY() - robot.getY()));
+
+    return curvature * side;
+}
+
+double pathLastT = 0.0;
+int pathLastLookAheadIndex = 0;
+int pathLastClosestIndex = 0;
+
+void followPath() {
+    Vector robotPos = robot.getPos();
+    LookAheadResult lookAheadResult = getLookAheadPoint(robotPos.getX(), robotPos.getY(), 
+        pathLastT, pathLastLookAheadIndex);
+    pathLastT = lookAheadResult.t;
+    pathLastLookAheadIndex = lookAheadResult.i;
+    Vector lookAheadPoint = lookAheadResult.lookAhead;
+
+    double curvature = getCurvatureToPoint(robotPos, robot.getAngle(), lookAheadPoint);
+    pathLastClosestIndex = getClosestPoint(robotPos.getX(), robotPos.getY(), pathLastClosestIndex);
+    double targetVelocity = smoothedPoints.get(pathLastClosestIndex).getTargetVelocity();
+
+    double left = targetVelocity * (2.0 + curvature * DRIVE_WIDTH) / 2.0;
+    double right = targetVelocity * (2.0 - curvature * DRIVE_WIDTH) / 2.0;
+    
+    robot.setLeft(left);
+    robot.setRight(right);
 }

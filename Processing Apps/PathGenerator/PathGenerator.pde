@@ -11,6 +11,7 @@ ArrayList<Double> curvatures;
 boolean userInjectedHidden;
 
 Robot robot;
+boolean following;
 
 /**
  * Green - smoothed (darker = more curvature)
@@ -32,6 +33,7 @@ void setup() {
     userInjectedHidden = false;
 
     robot = new Robot();
+    following = false;
     userPoints.add(new Waypoint(robot.getX(), robot.getY()));
 }
 
@@ -57,6 +59,10 @@ void draw() {
         Waypoint waypoint = smoothedPoints.get(i);
         double curvature = curvatures.get(i);
         drawWaypoint(waypoint, color(0, 255 - ((int) (128 * curvature * 50)), 0));
+    }
+
+    if(following) {
+        followPath();
     }
 }
 
@@ -125,6 +131,15 @@ void keyPressed() {
         for(Waypoint waypoint : smoothedPoints) {
             System.out.println(waypoint.getTargetVelocity());
         }
+    }
+    if(key == 'f') {
+        following = true;
+    }
+}
+
+void keyReleased() {
+    if(key == 'f') {
+        following = false;
     }
 }
 
